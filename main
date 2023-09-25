@@ -1,0 +1,39 @@
+import tkinter as tk
+from tkinter import Scale, Canvas
+
+# update colors
+def update_color(value):
+    r = red_scale.get()
+    g = green_scale.get()
+    b = blue_scale.get()
+    
+    color = f"#{r:02x}{g:02x}{b:02x}"
+    color_canvas.config(bg=color)
+    color_label.config(text=color)
+
+# window
+root = tk.Tk()
+root.title("Color Mixer")
+
+# scales for rgb
+red_scale = Scale(root, from_=0, to=255, orient=tk.HORIZONTAL, label="Red", command=update_color)
+green_scale = Scale(root, from_=0, to=255, orient=tk.HORIZONTAL, label="Green", command=update_color)
+blue_scale = Scale(root, from_=0, to=255, orient=tk.HORIZONTAL, label="Blue", command=update_color)
+
+red_scale.pack(fill=tk.X, padx=20, pady=5)
+green_scale.pack(fill=tk.X, padx=20, pady=5)
+blue_scale.pack(fill=tk.X, padx=20, pady=5)
+
+# display colors
+color_canvas = Canvas(root, height=100, width=300)
+color_canvas.pack(pady=10)
+
+# display hex
+color_label = tk.Label(root, text="")
+color_label.pack(pady=10)
+
+# uh updates color
+update_color(None)
+
+# gui loop
+root.mainloop()
